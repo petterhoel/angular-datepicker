@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --o",
+    "start": "npm run serve:test",
+    "serve:demo": "ng serve  --o",
+    "serve:test": "ng serve datepicker-test-app --o",
     "build": "ng build",
     "build:lib": "ng build ng2-date-picker",
     "test": "ng test",
