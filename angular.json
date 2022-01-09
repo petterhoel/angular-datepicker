@@ -169,6 +169,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "changeDetection": "OnPush",
           "inlineTemplate": true,
           "inlineStyle": true,
           "style": "scss",
@@ -267,24 +268,6 @@
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "datepicker-test-app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/datepicker-test-app/src/test.ts",
-            "polyfills": "projects/datepicker-test-app/src/polyfills.ts",
-            "tsConfig": "projects/datepicker-test-app/tsconfig.spec.json",
-            "karmaConfig": "projects/datepicker-test-app/karma.conf.js",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/datepicker-test-app/src/favicon.ico",
-              "projects/datepicker-test-app/src/assets"
-            ],
-            "styles": [
-              "projects/datepicker-test-app/src/styles.scss"
-            ],
-            "scripts": []
           }
         },
         "lint": {
