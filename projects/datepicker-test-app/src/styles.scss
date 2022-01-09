@@ -1,3 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/cdk/overlay-prebuilt.css';
 @import './dp-custom';
+
+* {
+  font-family: sans-serif;
+  letter-spacing: 0.002em;
+}
+
+
+label {
+  margin-right: 1em;
+}

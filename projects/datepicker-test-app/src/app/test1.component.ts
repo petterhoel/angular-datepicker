@@ -1,25 +1,24 @@
-import {Component, ChangeDetectionStrategy} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {IDatePickerConfig} from "../../../ng2-date-picker/src/lib/date-picker/date-picker-config.model";
 import {BehaviorSubject, Subject} from "rxjs";
+import {ECalendarValue} from "../../../ng2-date-picker/src/lib/common/types/calendar-value-enum";
 
 @Component({
   selector: 'dp-test1',
   template: `
-    <div *ngIf="ui$ | async as ui">
-      <h1>test1</h1>
-      <section>
+    <div *ngIf="ui$ | async as ui" style="display: flex;flex-direction: column;gap: 1em">
         <dp-date-picker
-          [config]="format"
-          (onChange)="output$.next($event)"
+          [config]="datePickerConfig"
+          (onChange)="datepickerOutput$.next($event)"
           [ngClass]="{'customStyle' : ui.isStyled, 'darkMode' : ui.theme === 'dark'}">
         </dp-date-picker>
-        <output *ngIf="output$ | async as output">
-          {{ output | json }}
+        <output *ngIf="datepickerOutput$ | async as output">
+          {{output | json}}
         </output>
-        <hr>
+      <aside>
         <label>
           <input #styledInput
-                 (change)="handleStyled(styledInput?.checked)"
+                 (change)="handleStyled(styledInput.checked)"
                  id="styled"
                  type="checkbox">
           styled</label>
@@ -40,32 +39,29 @@ import {BehaviorSubject, Subject} from "rxjs";
                  value="dark"
                  [disabled]="!styledInput.checked">
           {{dark.value}}</label>
-        <hr>
-        <output>
-          {{ ui | json}}
-        </output>
-      </section>
+      </aside>
     </div>
   `,
-  styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Test1Component {
-  format: IDatePickerConfig = {
-    format: 'DD.MM.YYYY'
+  datePickerConfig: IDatePickerConfig = {
+    format: 'DD.MM.YYYY',
+    firstDayOfWeek: 'mo',
+    returnedValueType: ECalendarValue.Dayjs,
   }
-  output$ = new Subject<any>();
+  datepickerOutput$ = new Subject<any>();
   ui$ = new BehaviorSubject<UI>(defaultUi)
 
   handleStyled(isStyled: boolean): void {
-    const currentUi = this.ui$.value;
-    this.ui$.next({...currentUi, isStyled})
+    const { value } = this.ui$;
+    this.ui$.next({...value, isStyled})
   }
 
   handleTheme(mode: string) {
-    const currentUi = this.ui$.value;
+    const { value } = this.ui$;
     const theme = mode === 'dark' ? 'dark' : 'light';
-    this.ui$.next({...currentUi, theme})
+    this.ui$.next({...value, theme})
   }
 }
 
