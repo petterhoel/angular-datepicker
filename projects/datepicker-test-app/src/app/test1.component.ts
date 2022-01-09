@@ -7,38 +7,40 @@ import {ECalendarValue} from "../../../ng2-date-picker/src/lib/common/types/cale
   selector: 'dp-test1',
   template: `
     <div *ngIf="ui$ | async as ui" style="display: flex;flex-direction: column;gap: 1em">
-        <dp-date-picker
-          [config]="datePickerConfig"
-          (onChange)="datepickerOutput$.next($event)"
-          [ngClass]="{'customStyle' : ui.isStyled, 'darkMode' : ui.theme === 'dark'}">
-        </dp-date-picker>
-        <output *ngIf="datepickerOutput$ | async as output">
-          {{output | json}}
-        </output>
+      <dp-date-picker
+        [config]="datePickerConfig"
+        (onChange)="datepickerOutput$.next($event)"
+        [ngClass]="{'customStyle' : ui.isStyled, 'darkMode' : ui.theme === 'dark'}">
+      </dp-date-picker>
+      <output *ngIf="datepickerOutput$ | async as output">
+        {{output | json}}
+      </output>
       <aside>
         <label>
-          <input #styledInput
-                 (change)="handleStyled(styledInput.checked)"
-                 id="styled"
-                 type="checkbox">
-          styled</label>
+          <input id="styled"
+                 type="checkbox"
+                 #styledInput
+                 (change)="handleStyled(styledInput.checked)">
+          styled
+        </label>
         <label>
           <input type="radio"
-                 (change)="handleTheme(light.value)"
-                 #light
                  name="theme"
                  value="light"
-                 [disabled]="!styledInput.checked">
+                 #light
+                 [disabled]="!styledInput.checked"
+                 (change)="handleTheme(light.value)">
           {{light.value}}
         </label>
         <label>
           <input type="radio"
-                 (change)="handleTheme(dark.value)"
-                 #dark
                  name="theme"
                  value="dark"
-                 [disabled]="!styledInput.checked">
-          {{dark.value}}</label>
+                 #dark
+                 [disabled]="!styledInput.checked"
+                 (change)="handleTheme(dark.value)">
+          {{dark.value}}
+        </label>
       </aside>
     </div>
   `,
@@ -54,12 +56,12 @@ export class Test1Component {
   ui$ = new BehaviorSubject<UI>(defaultUi)
 
   handleStyled(isStyled: boolean): void {
-    const { value } = this.ui$;
+    const {value} = this.ui$;
     this.ui$.next({...value, isStyled})
   }
 
   handleTheme(mode: string) {
-    const { value } = this.ui$;
+    const {value} = this.ui$;
     const theme = mode === 'dark' ? 'dark' : 'light';
     this.ui$.next({...value, theme})
   }
