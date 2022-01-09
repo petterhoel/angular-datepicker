@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import dayjs, {Dayjs} from 'dayjs';
+import no from 'dayjs/locale/no'
 
 @Component({
   selector: 'test-root',
@@ -8,4 +10,11 @@ import { Component } from '@angular/core';
   `,
   styles: []
 })
-export class AppComponent {}
+export class AppComponent {
+
+
+  constructor() {
+    dayjs.locale('no')
+  }
+
+}

@@ -1,0 +1,9 @@
+dp-date-picker.customStyle {
+  .dp-picker-input {
+    padding: 1em;
+  }
+}
+
+dp-date-picker.customStyle.darkMode {
+  filter: invert(1);
+}

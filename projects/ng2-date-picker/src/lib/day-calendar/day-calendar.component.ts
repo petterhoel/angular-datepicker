@@ -43,7 +43,7 @@ import {dayjsRef} from '../common/dayjs/dayjs.ref';
   styleUrls: ['day-calendar.component.less'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
+providers: [
     DayCalendarService,
     {
       provide: NG_VALUE_ACCESSOR,

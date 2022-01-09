@@ -10,8 +10,7 @@
       ],
       "parserOptions": {
         "project": [
-          "projects/datepicker-test-app/tsconfig.app.json",
-          "projects/datepicker-test-app/tsconfig.spec.json"
+          "projects/datepicker-test-app/tsconfig.app.json"
         ],
         "createDefaultProgram": true
       },
